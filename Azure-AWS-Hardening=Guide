@@ -1,0 +1,32 @@
+# Fintech Cloud Hardening Guide: Azure & AWS 
+**Focus:** CIS Benchmark Alignment & Zero-Trust Architecture
+
+## 1. Microsoft Azure (Entra ID & Infrastructure)
+### **Identity & Access Management**
+- [ ] **Global MFA:** Enforce Phish-Resistant MFA (FIDO2/YubiKey) for all Administrative roles.
+- [ ] **Conditional Access (CA):** Implement 'Verify Every Sign-in' logic—blocking access from non-compliant devices or unauthorized geofences.
+- [ ] **PIM:** Use Privileged Identity Management for 'Just-In-Time' (JIT) elevation.
+
+### **Network & Compute**
+- [ ] **NSG Hardening:** Disable all RDP (3389) and SSH (22) ports to the public internet. Use Azure Bastion for secure management.
+- [ ] **Encryption:** Ensure all Storage Accounts and Managed Disks use AES-256 (CMK preferred).
+
+---
+
+## 2. Amazon Web Services (AWS Foundations)
+### **IAM Governance**
+- [ ] **Root Account:** MFA enabled, hardware key stored in a physical safe. Zero active API keys on Root.
+- [ ] **Least Privilege:** Use IAM Roles instead of User Access Keys where possible. Implement 'Permissions Boundaries' for developers.
+
+### **Logging & Detection**
+- [ ] **CloudTrail:** Enabled across all regions with 'Log File Validation' active.
+- [ ] **GuardDuty:** Activated for intelligent threat detection and anomalous API activity monitoring.
+
+---
+
+## 3. The "Fintech Baseline" Compliance Map
+| Control | Azure Tool | AWS Tool | Goal |
+| :--- | :--- | :--- | :--- |
+| **SIEM/SOAR** | Microsoft Sentinel | Amazon Security Lake | Centralized Visibility |
+| **Threat Protection** | Defender for Cloud | GuardDuty / Inspector | Real-time Blocking |
+| **Secrets Mgmt** | Azure Key Vault | AWS Secrets Manager | Zero Hardcoded Keys |
